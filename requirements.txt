@@ -1,0 +1,9 @@
+pillow
+imagehash
+numpy
+xxhash
+pydantic>=2.0
+rich
+tqdm
+tldextract
+requests

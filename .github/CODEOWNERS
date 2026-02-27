@@ -1,0 +1,10 @@
+# Global owners — all files require review from @StormDoragon
+* @StormDoragon
+
+# Core engine
+/src/veritaslayer/core/ @StormDoragon
+/src/veritaslayer/utils/ @StormDoragon
+
+# Security & CI
+/.github/ @StormDoragon
+SECURITY.md @StormDoragon
