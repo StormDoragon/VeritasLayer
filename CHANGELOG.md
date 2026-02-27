@@ -5,3 +5,4 @@
 - Initial VeritasLayer research-grade repository skeleton.
 - Added modular core packages and CLI scaffold.
 - Added docs, tests, and benchmark script stubs.
+
