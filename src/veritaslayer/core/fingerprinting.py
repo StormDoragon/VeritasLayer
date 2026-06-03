@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Union
+from typing import Any
 
 
 class ContentFingerprint:
@@ -17,7 +17,7 @@ class ContentFingerprint:
 
     @staticmethod
     def compute(
-        content: Union[str, bytes, Path],
+        content: str | bytes | Path,
         source_url: str = "",
     ) -> dict[str, Any]:
         """Return a fingerprint dict for text or binary content."""
@@ -55,7 +55,9 @@ class ContentFingerprint:
             # Byte-level entropy proxy (std of byte values)
             byte_array = list(data)
             mean = sum(byte_array) / max(len(byte_array), 1)
-            variance = sum((b - mean) ** 2 for b in byte_array) / max(len(byte_array), 1)
+            variance = (
+                sum((b - mean) ** 2 for b in byte_array) / max(len(byte_array), 1)
+            )
             result["perceptual"]["byte_entropy_proxy"] = round(variance ** 0.5, 4)
 
         except Exception as exc:  # noqa: BLE001

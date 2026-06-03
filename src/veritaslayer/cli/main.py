@@ -67,7 +67,8 @@ def _render_rich(report: AuthenticityReport) -> None:
         )
 
     console.print(table)
-    console.print(f"[dim]Fingerprint SHA-256: {report.fingerprint.get('hashes', {}).get('sha256', 'n/a')}[/dim]")
+    sha = report.fingerprint.get("hashes", {}).get("sha256", "n/a")
+    console.print(f"[dim]Fingerprint SHA-256: {sha}[/dim]")
     console.print(f"[dim]{report.security_note}[/dim]\n")
 
 
@@ -89,7 +90,6 @@ def main() -> int:
     )
 
     report = build_report(
-        text=text,
         source_url=args.source_url or None,
         fingerprint=fingerprint,
         forensic_signal=forensic_signal,

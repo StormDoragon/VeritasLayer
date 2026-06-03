@@ -6,9 +6,29 @@ Probabilistic authenticity signals. Never certainty. Always auditable, explainab
 
 ---
 
+## ⚠️ Current Status: Alpha / Early Prototype
+
+**VeritasLayer is not yet research-grade.** The current codebase is an early heuristic prototype.
+
+| Area | Status |
+|---|---|
+| CLI + JSON report | ✅ Implemented |
+| Forensic text analysis | ⚠️ Baseline heuristic only — not calibrated |
+| Source credibility | ⚠️ Domain-list matching — not ML-backed |
+| Propagation analysis | ⚠️ Formula heuristic — not benchmarked |
+| Content fingerprinting | ✅ SHA-256 + SHA3-256 + entropy proxy |
+| Image pHash / frame hashing | 🔲 Planned |
+| Methodology documentation | 🔲 In progress |
+| Benchmark datasets | 🔲 Planned |
+| False-positive/negative rates | 🔲 Not yet measured |
+
+The project philosophy and long-term goals are described below. Treat the current code as a scaffolded stub, not a validated research tool.
+
+---
+
 ## 🔥 Project Identity
 
-You’re building:
+You're building:
 
 > An open, modular, research-grade authenticity verification engine for digital content.
 
@@ -24,7 +44,7 @@ Just **probabilistic authenticity signals**.
 
 Restore confidence in digital media by making authenticity **measurable**.
 
-In the AI era, trust won’t come from institutions — it will come from transparent systems.
+In the AI era, trust won't come from institutions — it will come from transparent systems.
 
 **Must be:**
 - Auditable
@@ -44,20 +64,20 @@ In the AI era, trust won’t come from institutions — it will come from transp
 5. Separate detection from judgment.
 
 Example output:  
-**“82% likelihood of synthetic text. High entropy variation. Stylometric drift. Source domain previously flagged.”**
+**"82% likelihood of synthetic text. High entropy variation. Stylometric drift. Source domain previously flagged."**
 
 ---
 
 ## 🏗 Architecture (Research Modules)
 
-- **Module A — Content Fingerprinting** (SHA-256, pHash, frame hashing, text fingerprinting)
-- **Module B — Forensic Analysis Engine** (images, text, audio roadmap)
-- **Module C — Source Credibility Layer** (domain age, ownership, historical scoring)
-- **Module D — Network Propagation Mapping** (advanced phase)
+- **Module A — Content Fingerprinting** (SHA-256, SHA3-256, byte entropy proxy implemented; pHash and frame hashing *planned*)
+- **Module B — Forensic Analysis Engine** (baseline heuristic implemented; calibrated model *planned*)
+- **Module C — Source Credibility Layer** (domain-list matching implemented; domain-age/ownership scoring *planned*)
+- **Module D — Network Propagation Mapping** (formula heuristic implemented; advanced network analysis *planned*)
 
 ---
 
-## 📚 Research-Grade Standards
+## 📚 Research-Grade Standards (Target — not yet met)
 
 - Cite papers in README/docs
 - Full methodology documentation
