@@ -18,9 +18,11 @@ Only the latest release on `main` is supported.
 - All commits to `main` must be **signed**
 - Full branch protection + CODEOWNERS
 - Dependabot + CodeQL scanning on every PR
-- No untrusted actions in CI (all actions pinned by SHA)
+- CI actions are pinned by version tag (e.g. `actions/checkout@v4`). Upgrading to full SHA pinning is tracked as a future hardening task.
 - Adversarial robustness testing in benchmarks
 - Strict input validation — zero `eval`/`exec` in production code
-- Pydantic v2 strict models with `extra='forbid'` throughout
+- Pydantic v2 strict models with `extra='forbid'` throughout (falls back to dataclass validation when Pydantic is unavailable — see note below)
+
+> **Note on Pydantic fallback**: When Pydantic is not installed, the dataclass fallback path does not enforce value-range constraints. Pydantic is a declared runtime dependency and should always be present in correctly installed environments.
 
 Thank you for helping keep digital trust infrastructure secure.

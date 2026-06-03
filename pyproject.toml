@@ -5,7 +5,27 @@ description = "Research-grade digital content authenticity verification engine"
 authors = [{name = "SarcasticApeSquad", email = "your@email.com"}]
 license = {text = "MIT"}
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "pydantic>=2.0",
+    "rich",
+]
+
+[project.optional-dependencies]
+research = [
+    "pillow",
+    "imagehash",
+    "numpy",
+    "xxhash",
+    "tldextract",
+    "requests",
+    "tqdm",
+]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+]
 
 [project.scripts]
 veritaslayer = "veritaslayer.cli.main:main"

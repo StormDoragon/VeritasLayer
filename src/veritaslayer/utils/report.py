@@ -39,8 +39,16 @@ if _PYDANTIC:
         )
 
 else:
-    # Fallback dataclass for envs without pydantic installed
+    # Fallback dataclass — used only when Pydantic is not installed.
+    # NOTE: value-range constraints (0.0–1.0) are enforced manually below
+    # rather than by the field declarations, so strict schema guarantees
+    # are weaker than the Pydantic path.
     from dataclasses import asdict, dataclass, field
+
+    def _clamp_probability(value: float, name: str) -> float:
+        if not (0.0 <= value <= 1.0):
+            raise ValueError(f"{name} must be between 0.0 and 1.0, got {value!r}")
+        return value
 
     @dataclass(frozen=True)
     class AuthenticitySignal:  # type: ignore[no-redef]
@@ -49,6 +57,10 @@ else:
         explanation: str
         confidence: float
         details: dict[str, Any] = field(default_factory=dict)
+
+        def __post_init__(self) -> None:
+            _clamp_probability(self.probability_synthetic, "probability_synthetic")
+            _clamp_probability(self.confidence, "confidence")
 
     @dataclass(frozen=True)
     class AuthenticityReport:  # type: ignore[no-redef]
@@ -64,6 +76,12 @@ else:
             "Report is deterministic given input. Signed commits required upstream."
         )
 
+        def __post_init__(self) -> None:
+            _clamp_probability(
+                self.overall_synthetic_probability,
+                "overall_synthetic_probability",
+            )
+
         def model_dump(self, **_: Any) -> dict[str, Any]:
             return asdict(self)
 
@@ -74,13 +92,17 @@ else:
 
 
 def build_report(
-    text: str,
     source_url: str | None,
     fingerprint: dict[str, Any],
     forensic_signal: dict[str, Any],
     credibility_signal: dict[str, Any],
     propagation_signal: dict[str, Any],
 ) -> AuthenticityReport:
+    """Compose an AuthenticityReport from pre-computed signals.
+
+    The ``text`` parameter was removed in v0.1.1 — it was accepted but
+    never used.  Pass derived metadata via ``fingerprint`` instead.
+    """
     forensic_score: float = float(forensic_signal.get("score", 0.5))
     cred_score: float = float(credibility_signal.get("score", 0.5))
     prop_score: float = float(propagation_signal.get("score", 0.5))
