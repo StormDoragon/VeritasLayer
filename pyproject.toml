@@ -3,7 +3,7 @@ name = "veritaslayer"
 version = "0.1.0"
 description = "Research-grade digital content authenticity verification engine"
 authors = [{name = "SarcasticApeSquad", email = "your@email.com"}]
-license = {text = "MIT"}
+license = "MIT"
 requires-python = ">=3.10"
 dependencies = [
     "pydantic>=2.0",
@@ -25,6 +25,7 @@ dev = [
     "pytest-cov",
     "ruff",
     "mypy",
+    "build",
 ]
 
 [project.scripts]
